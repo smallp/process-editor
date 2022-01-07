@@ -1,0 +1,23 @@
+{
+  "name": "small-line",
+  "version": "1.0.0",
+  "description": "",
+  "main": "back/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "vite"
+  },
+  "author": "small",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "@vue/compiler-sfc": "^3.2.26",
+    "electron": "^16.0.6",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "ant-design-vue": "^3.0.0-beta.5",
+    "vue": "^3.2.26"
+  }
+}
