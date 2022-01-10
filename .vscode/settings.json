@@ -1,8 +1,5 @@
 {
     "editor.formatOnSaveMode": "file",
     "editor.formatOnSave": true,
-    "prettier.semi": false,
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    "prettier.semi": false
 }
