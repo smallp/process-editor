@@ -4,7 +4,8 @@
   "description": "",
   "main": "back/index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "NODE_ENV='dev' electron .",
+    "build": "vite build",
     "dev": "vite"
   },
   "author": "small",

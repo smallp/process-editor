@@ -3,28 +3,32 @@ import {
   FolderTwoTone,
   FileTwoTone,
   FolderOpenTwoTone,
+  FileAddTwoTone,
+  FolderAddTwoTone,
+  EditTwoTone,
+  DeleteTwoTone,
 } from "@ant-design/icons-vue"
 import { EventDataNode } from "ant-design-vue/es/tree"
 import { ref } from "vue"
 
 const emit = defineEmits<{
-  (e: "fuck", key: string): void
+  (e: "select", key: string): void
 }>()
 
 let data = [
   {
     title: "root",
-    key: "root",
+    key: "0",
     children: [
       {
         title: "test",
-        key: 1,
+        key: "01",
         children: [
-          { title: "t1", key: 11, children: [] },
-          { title: "t2", key: 12 },
+          { title: "t1", key: "02", children: [] },
+          { title: "t2", key: "12" },
         ],
       },
-      { title: "xixi", key: 0 },
+      { title: "xixi", key: "1" },
     ],
   },
 ]
@@ -42,7 +46,7 @@ function select(
 ) {
   let data = info.node.dataRef
   if ("children" in data) return
-  emit("fuck", data.key.toString())
+  emit("select", data.key.toString())
 }
 </script>
 
@@ -64,9 +68,22 @@ function select(
                 onContextMenuClick(treeKey, menuKey.toString())
             "
           >
-            <a-menu-item key="1">1st menu item</a-menu-item>
-            <a-menu-item key="2">2nd menu item</a-menu-item>
-            <a-menu-item key="3">3rd menu item</a-menu-item>
+            <template v-if="treeKey.startsWith('0')">
+              <a-menu-item key="addFolder">
+                <template #icon><folder-add-two-tone /></template
+                >添加文件夹</a-menu-item
+              >
+              <a-menu-item key="addFile">
+                <template #icon><file-add-two-tone /></template>
+                添加文件</a-menu-item
+              ></template
+            >
+            <a-menu-item key="rename">
+              <template #icon><edit-two-tone /></template>重命名</a-menu-item
+            >
+            <a-menu-item key="delete" v-if="treeKey != '0'">
+              <template #icon><delete-two-tone /></template>删除</a-menu-item
+            >
           </a-menu>
         </template>
       </a-dropdown>

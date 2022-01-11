@@ -9,4 +9,5 @@ export default defineConfig({
     vue(),
     Components({ dts: true, resolvers: [AntDesignVueResolver()] }),
   ],
+  base: "./",
 })

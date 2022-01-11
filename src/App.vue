@@ -16,7 +16,7 @@ function selected(name: string) {
           left: 0,
         }"
       >
-        <my-menu @fuck="selected" />
+        <my-menu @select="selected" />
       </a-layout-sider>
       <a-layout-content>Content</a-layout-content>
     </a-layout>
