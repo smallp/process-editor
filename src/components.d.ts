@@ -12,7 +12,14 @@ declare module 'vue' {
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATree: typeof import('ant-design-vue/es')['Tree']
-    MyMenu: typeof import('./src/components/menu/myMenu.vue')['default']
+    DeleteTwoTone: typeof import('@ant-design/icons-vue')['DeleteTwoTone']
+    EditTwoTone: typeof import('@ant-design/icons-vue')['EditTwoTone']
+    FileAddTwoTone: typeof import('@ant-design/icons-vue')['FileAddTwoTone']
+    FileTwoTone: typeof import('@ant-design/icons-vue')['FileTwoTone']
+    FolderAddTwoTone: typeof import('@ant-design/icons-vue')['FolderAddTwoTone']
+    FolderOpenTwoTone: typeof import('@ant-design/icons-vue')['FolderOpenTwoTone']
+    FolderTwoTone: typeof import('@ant-design/icons-vue')['FolderTwoTone']
+    MyMenu: typeof import('./components/menu/myMenu.vue')['default']
   }
 }
 

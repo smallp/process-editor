@@ -7,7 +7,13 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers"
 export default defineConfig({
   plugins: [
     vue(),
-    Components({ dts: true, resolvers: [AntDesignVueResolver()] }),
+    Components({
+      dts: "src/components.d.ts",
+      resolvers: [AntDesignVueResolver({ resolveIcons: true })],
+    }),
   ],
+  build: {
+    sourcemap: true,
+  },
   base: "./",
 })

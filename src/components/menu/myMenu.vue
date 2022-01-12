@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  FolderTwoTone,
-  FileTwoTone,
-  FolderOpenTwoTone,
-  FileAddTwoTone,
-  FolderAddTwoTone,
-  EditTwoTone,
-  DeleteTwoTone,
-} from "@ant-design/icons-vue"
-import { EventDataNode } from "ant-design-vue/es/tree"
+import { AntTreeNodeExpandedEvent, EventDataNode } from "ant-design-vue/es/tree"
 import { ref } from "vue"
 
 const emit = defineEmits<{
@@ -28,14 +19,26 @@ let data = [
           { title: "t2", key: "12" },
         ],
       },
+      { title: "t13", key: "03", children: [{ title: "hh", key: "11" }] },
       { title: "xixi", key: "1" },
     ],
   },
 ]
-let expandedKeys = ref(["root"])
+let expandedKeys = ref(["0"])
 
 const onContextMenuClick = (treeKey: string, menuKey: string) => {
   console.log(`treeKey: ${treeKey}, menuKey: ${menuKey}`)
+}
+
+function handleExpand(keys: string[], info: AntTreeNodeExpandedEvent) {
+  const node = info.node
+  if (!node.parent) return
+  const pKey = node.parent.key.toString()
+  if (info.expanded) {
+    const index = expandedKeys.value.indexOf(pKey)
+    expandedKeys.value = expandedKeys.value.slice(0, index + 1)
+    expandedKeys.value.push(node.key.toString())
+  }
 }
 
 function select(
@@ -56,6 +59,7 @@ function select(
     :draggable="true"
     :show-icon="true"
     v-model:expandedKeys="expandedKeys"
+    @expand="handleExpand"
     @select="select"
   >
     <template #title="{ key: treeKey, title }">

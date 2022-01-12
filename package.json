@@ -6,13 +6,12 @@
   "scripts": {
     "start": "NODE_ENV='dev' electron .",
     "build": "vite build",
-    "dev": "vite"
+    "dev": "DEBUG=unplugin-vue-components:* vite"
   },
   "author": "small",
   "license": "MIT",
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
-    "@vue/compiler-sfc": "^3.2.26",
     "electron": "^16.0.6",
     "typescript": "^4.5.4",
     "unplugin-vue-components": "^0.17.11",
