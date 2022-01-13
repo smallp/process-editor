@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV='dev' electron .",
     "build": "vite build",
-    "dev": "DEBUG=unplugin-vue-components:* vite"
+    "dev": "vite"
   },
   "author": "small",
   "license": "MIT",

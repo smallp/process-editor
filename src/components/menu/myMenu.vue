@@ -32,12 +32,21 @@ const onContextMenuClick = (treeKey: string, menuKey: string) => {
 
 function handleExpand(keys: string[], info: AntTreeNodeExpandedEvent) {
   const node = info.node
-  if (!node.parent) return
-  const pKey = node.parent.key.toString()
+  if (!node.parent) {
+    if (!info.expanded) {
+      expandedKeys.value.length = 0
+    }
+    return
+  }
   if (info.expanded) {
+    const pKey = node.parent.key.toString()
     const index = expandedKeys.value.indexOf(pKey)
     expandedKeys.value = expandedKeys.value.slice(0, index + 1)
     expandedKeys.value.push(node.key.toString())
+  } else {
+    const key = node.key.toString()
+    const index = expandedKeys.value.indexOf(key)
+    expandedKeys.value.splice(index + 1)
   }
 }
 
