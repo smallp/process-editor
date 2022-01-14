@@ -5,12 +5,14 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AInput: typeof import('ant-design-vue/es')['Input']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
     ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    AModal: typeof import('ant-design-vue/es')['Modal']
     ATree: typeof import('ant-design-vue/es')['Tree']
     DeleteTwoTone: typeof import('@ant-design/icons-vue')['DeleteTwoTone']
     EditTwoTone: typeof import('@ant-design/icons-vue')['EditTwoTone']
@@ -19,7 +21,8 @@ declare module 'vue' {
     FolderAddTwoTone: typeof import('@ant-design/icons-vue')['FolderAddTwoTone']
     FolderOpenTwoTone: typeof import('@ant-design/icons-vue')['FolderOpenTwoTone']
     FolderTwoTone: typeof import('@ant-design/icons-vue')['FolderTwoTone']
-    MyMenu: typeof import('./components/menu/myMenu.vue')['default']
+    MyMenu: typeof import('./components/myMenu.vue')['default']
+    ProcessMain: typeof import('./components/processMain.vue')['default']
   }
 }
 
