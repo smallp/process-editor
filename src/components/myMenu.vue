@@ -141,7 +141,7 @@ function select(
             <a-menu-item key="rename">
               <template #icon><edit-two-tone /></template>重命名</a-menu-item
             >
-            <a-menu-item key="delete" v-if="info.key != '0'">
+            <a-menu-item key="delete" v-if="info.key != '0'" danger>
               <template #icon><delete-two-tone /></template>删除</a-menu-item
             >
           </a-menu>
