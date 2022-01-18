@@ -1,8 +1,10 @@
 <script setup lang="ts">
-let selectedKey = ""
+import { ref } from "vue"
+
+let selectedKey = ref("")
 function selected(name: string) {
   console.log("get " + name)
-  selectedKey = name
+  selectedKey.value = name
 }
 </script>
 

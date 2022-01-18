@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { Graph, Addon, Shape } from "@antv/x6"
-import { onMounted } from "vue"
+import { onMounted, toRef, watch } from "vue"
 import { group, showPorts } from "./tempNodes"
 import { message } from "ant-design-vue"
 import "ant-design-vue/es/message/style/css"
 
 const prop = defineProps<{ pname: string }>()
+watch(toRef(prop, "pname"), (newv, ori) => {
+  console.log(newv, ori)
+})
 let graph: Graph
 
 function init() {
