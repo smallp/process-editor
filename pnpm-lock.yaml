@@ -7,7 +7,7 @@ specifiers:
   ant-design-vue: ^3.0.0-beta.6
   electron: 16.0.6
   typescript: ^4.5.4
-  unplugin-vue-components: ^0.17.11
+  unplugin-vue-components: ^0.17.13
   vite: ^2.7.2
   vue: ^3.2.26
   vue-router: ^4.0.12
@@ -23,7 +23,7 @@ devDependencies:
   '@vitejs/plugin-vue': 2.0.1_vite@2.7.12+vue@3.2.26
   electron: 16.0.6
   typescript: 4.5.4
-  unplugin-vue-components: 0.17.11_vite@2.7.12+vue@3.2.26
+  unplugin-vue-components: 0.17.13_vite@2.7.12+vue@3.2.26
   vite: 2.7.12
 
 packages:
@@ -56,8 +56,8 @@ packages:
       vue: 3.2.26
     dev: false
 
-  /@antfu/utils/0.3.0:
-    resolution: {integrity: sha1-YwbEO1Kog72Olz4+2N1kJIQYvMQ=, tarball: '@antfu/utils/download/@antfu/utils-0.3.0.tgz'}
+  /@antfu/utils/0.4.0:
+    resolution: {integrity: sha512-gqkpvjkgFUu+s3kP+Ly33OKpo5zvVY3FDFhv5BIb98SncS3KD6DNxPfNDjwHIoyXbz1leWo1j8DtRLZ1D2Jv+Q==, tarball: '@antfu/utils/download/@antfu/utils-0.4.0.tgz'}
     dependencies:
       '@types/throttle-debounce': 2.1.0
     dev: true
@@ -693,8 +693,8 @@ packages:
       yauzl: 2.10.0
     dev: true
 
-  /fast-glob/3.2.10:
-    resolution: {integrity: sha512-s9nFhFnvR63wls6/kM88kQqDhMu0AfdjqouE2l5GVQPbqLgyFjjU5ry/r2yKsJxpb9Py1EYNqieFrmMaX4v++A==, tarball: fast-glob/download/fast-glob-3.2.10.tgz}
+  /fast-glob/3.2.11:
+    resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==, tarball: fast-glob/download/fast-glob-3.2.11.tgz}
     engines: {node: '>=8.6.0'}
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -1305,8 +1305,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /unplugin-vue-components/0.17.11_vite@2.7.12+vue@3.2.26:
-    resolution: {integrity: sha512-u5MQ0TbikszRelCt6EA/HskGtGkGLDxi7tQ4/4tcEPWkH3yXSZRJCOeLF5MSdxN1SiGjaJ0I9zeHjoZFC3FvRw==, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.11.tgz}
+  /unplugin-vue-components/0.17.13_vite@2.7.12+vue@3.2.26:
+    resolution: {integrity: sha512-WII6hAW+HSvlXDx4t0LqcAvLg4ESsoBz1nuUDMPx6ZGuKBPjSRP4Wmnk559nZ6qpaOW41iY48cBeUpWSPjH7WA==, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.13.tgz}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -1318,31 +1318,35 @@ packages:
       '@babel/traverse':
         optional: true
     dependencies:
-      '@antfu/utils': 0.3.0
+      '@antfu/utils': 0.4.0
       '@rollup/pluginutils': 4.1.2
       chokidar: 3.5.2
       debug: 4.3.3
-      fast-glob: 3.2.10
+      fast-glob: 3.2.11
       local-pkg: 0.4.1
       magic-string: 0.25.7
       minimatch: 3.0.4
       resolve: 1.21.0
-      unplugin: 0.2.21_vite@2.7.12
+      unplugin: 0.3.0_vite@2.7.12
       vue: 3.2.26
     transitivePeerDependencies:
+      - esbuild
       - rollup
       - supports-color
       - vite
       - webpack
     dev: true
 
-  /unplugin/0.2.21_vite@2.7.12:
-    resolution: {integrity: sha512-IJ15/L5XbhnV7J09Zjk0FT5HEkBjkXucWAXQWRsmEtUxmmxwh23yavrmDbCF6ZPxWiVB28+wnKIHePTRRpQPbQ==, tarball: unplugin/download/unplugin-0.2.21.tgz}
+  /unplugin/0.3.0_vite@2.7.12:
+    resolution: {integrity: sha512-9yLlOo+XC4NdIRgpkDSHOAHkQDq2x4mbuVNO/eKVa3C8WTn5wWGfzEFfRJFL8euqnX3Gf7hEur0AhXxy+WSwkg==, tarball: unplugin/download/unplugin-0.3.0.tgz}
     peerDependencies:
+      esbuild: '>=0.13'
       rollup: ^2.50.0
       vite: ^2.3.0
       webpack: 4 || 5
     peerDependenciesMeta:
+      esbuild:
+        optional: true
       rollup:
         optional: true
       vite:

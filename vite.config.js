@@ -12,8 +12,5 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver({ resolveIcons: true })],
     }),
   ],
-  build: {
-    sourcemap: true,
-  },
   base: "./",
 })

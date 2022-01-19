@@ -4,14 +4,14 @@ var electron_1 = require("electron");
 var path_1 = require("path");
 function createWindow() {
     var win = new electron_1.BrowserWindow({
-        width: 800,
-        height: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
             preload: (0, path_1.join)(__dirname, "preload.js"),
         },
     });
+    win.maximize();
     if (process.env.NODE_ENV == "dev") {
         win.loadURL("http://127.0.0.1:3000");
         win.webContents.openDevTools();
@@ -19,6 +19,7 @@ function createWindow() {
     else {
         win.loadFile("dist/index.html");
     }
+    win.show();
 }
 electron_1.app.whenReady().then(function () {
     createWindow();
