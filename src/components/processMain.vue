@@ -1,18 +1,35 @@
 <script lang="ts" setup>
 import { Graph, Addon, Shape } from "@antv/x6"
 import { onMounted, toRef, watch } from "vue"
-import { group, showPorts } from "./tempNodes"
-import { message } from "ant-design-vue"
+import { group } from "./tempNodes"
+import { editLabel, editOnEnter, bindEvents, hideEdit } from "./eventHandle"
 import "ant-design-vue/es/message/style/css"
+import "ant-design-vue/es/modal/style/css"
+import { Modal } from "ant-design-vue"
 
 const prop = defineProps<{ pname: string }>()
 watch(toRef(prop, "pname"), (newv, ori) => {
-  console.log(newv, ori)
+  if (newv == "" || newv == "del") {
+    graph.clearCells()
+  } else if (ori.length > 3 && graph.history.canUndo()) {
+    Modal.confirm({
+      title: "需要保存修改吗?",
+      onOk() {
+        let data = graph.toJSON()
+        localStorage.setItem(ori, JSON.stringify(data))
+        init()
+      },
+      onCancel() {
+        init()
+      },
+    })
+  } else {
+    init()
+  }
 })
-let graph: Graph
-
+let graph: Graph, container: HTMLElement
 function init() {
-  const container = document.getElementById("main")
+  if (graph) graph.dispose()
   let w = document.body.clientWidth - 400
   let h = document.body.clientHeight - 64
   graph = new Graph({
@@ -88,70 +105,7 @@ function init() {
       },
     },
   })
-  //ctrl+cv delete
-  graph.bindKey(["ctrl+s", "meta+s"], () => {
-    message.success("保存成功！")
-    return false
-  })
-  graph.bindKey(["meta+c", "ctrl+c"], () => {
-    const cells = graph.getSelectedCells()
-    if (cells.length) {
-      graph.copy(cells)
-    }
-    return false
-  })
-  graph.bindKey(["meta+x", "ctrl+x"], () => {
-    const cells = graph.getSelectedCells()
-    if (cells.length) {
-      graph.cut(cells)
-    }
-    return false
-  })
-  graph.bindKey(["meta+v", "ctrl+v"], () => {
-    if (!graph.isClipboardEmpty()) {
-      const cells = graph.paste({ offset: 32 })
-      graph.cleanSelection()
-      graph.select(cells)
-    }
-    return false
-  })
-  graph.bindKey(["backspace", "delete"], () => {
-    const cells = graph.getSelectedCells()
-    if (cells.length) {
-      graph.removeCells(cells)
-    }
-  })
-  // #endregion
-
-  //undo redo
-  graph.bindKey(["meta+z", "ctrl+z"], () => {
-    if (graph.history.canUndo()) {
-      graph.history.undo()
-    }
-    return false
-  })
-  graph.bindKey(["meta+shift+z", "ctrl+shift+z"], () => {
-    if (graph.history.canRedo()) {
-      graph.history.redo()
-    }
-    return false
-  })
-  // #endregion
-
-  // 控制连接桩显示/隐藏
-  graph.on("node:mouseenter", () => {
-    const ports = container.querySelectorAll(
-      ".x6-port-body"
-    ) as NodeListOf<SVGElement>
-    showPorts(ports, true)
-  })
-  graph.on("node:mouseleave", () => {
-    const ports = container.querySelectorAll(
-      ".x6-port-body"
-    ) as NodeListOf<SVGElement>
-    showPorts(ports, false)
-  })
-  // #endregion
+  bindEvents(graph, container, prop)
 
   const stencil = new Addon.Stencil({
     target: graph,
@@ -174,13 +128,32 @@ function init() {
   group.forEach((v, k) => {
     stencil.load(v, k)
   })
+  let data = ""
+  if (prop.pname.length > 3) {
+    data = localStorage.getItem(prop.pname)
+    if (data) {
+      graph.fromJSON(JSON.parse(data))
+      graph.centerContent()
+    }
+  }
 }
 
-onMounted(init)
+onMounted(() => {
+  container = document.getElementById("main")
+  init()
+})
 </script>
 <template>
   <div id="tools"></div>
   <div id="container"><div id="main"></div></div>
+  <div id="editor" v-show="editLabel.show">
+    <a-textarea
+      v-model:value="editLabel.value"
+      @pressEnter="editOnEnter"
+      @keydown.esc="hideEdit"
+      @blur="hideEdit"
+    />
+  </div>
 </template>
 <style>
 #tools {
@@ -191,5 +164,8 @@ onMounted(init)
 #container {
   position: fixed;
   right: 0;
+}
+#editor {
+  position: fixed;
 }
 </style>

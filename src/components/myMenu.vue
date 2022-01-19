@@ -67,6 +67,9 @@ function delContent(root: DataNode) {
       delContent(x)
     }
   } else {
+    if (selectedKey == root.key) {
+      emit("select", "del")
+    }
     localStorage.removeItem(root.key.toString())
   }
 }
@@ -138,6 +141,7 @@ function onDrop(info: AntTreeNodeDropEvent) {
   localStorage.setItem("menu", JSON.stringify(data.children))
 }
 
+let selectedKey = ""
 function select(
   _selectKeys: Array<string>,
   info: {
@@ -146,7 +150,8 @@ function select(
 ) {
   let data = info.node.dataRef
   if ("children" in data) return
-  emit("select", data.key.toString())
+  selectedKey = data.key.toString()
+  emit("select", selectedKey)
 }
 </script>
 

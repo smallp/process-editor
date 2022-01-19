@@ -13,6 +13,8 @@ declare module 'vue' {
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     AModal: typeof import('ant-design-vue/es')['Modal']
+    APopover: typeof import('ant-design-vue/es')['Popover']
+    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     ATree: typeof import('ant-design-vue/es')['Tree']
     DeleteTwoTone: typeof import('@ant-design/icons-vue')['DeleteTwoTone']
     EditTwoTone: typeof import('@ant-design/icons-vue')['EditTwoTone']
@@ -23,6 +25,7 @@ declare module 'vue' {
     FolderTwoTone: typeof import('@ant-design/icons-vue')['FolderTwoTone']
     MyMenu: typeof import('./components/myMenu.vue')['default']
     ProcessMain: typeof import('./components/processMain.vue')['default']
+    QuestionCircleTwoTone: typeof import('@ant-design/icons-vue')['QuestionCircleTwoTone']
   }
 }
 
