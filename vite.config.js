@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     Components({
       dts: "src/components.d.ts",
-      resolvers: [AntDesignVueResolver({ resolveIcons: true })],
+      resolvers: [AntDesignVueResolver({ resolveIcons: true,importStyle:false })],
     }),
   ],
   base: "./",

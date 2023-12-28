@@ -1,39 +1,66 @@
 import { Graph } from "@antv/x6"
-import { DataUri } from "@antv/x6"
 import { nextTick, reactive } from "vue"
-import { message } from "ant-design-vue"
+import { Clipboard } from '@antv/x6-plugin-clipboard'
+import { Selection } from '@antv/x6-plugin-selection'
+import { Keyboard } from '@antv/x6-plugin-keyboard'
+import { History } from '@antv/x6-plugin-history'
+import { Scroller } from '@antv/x6-plugin-scroller'
+import { Snapline } from '@antv/x6-plugin-snapline'
 
 //改文字相关
 export const editLabel = reactive({
-  value: "",
+  value: {
+    img:'',
+    name:'',
+    url:'',
+  },
   show: false,
   callback: () => {},
 })
-export function editOnEnter(e: KeyboardEvent) {
-  if (e.shiftKey) return
+export function editOnEnter() {
   editLabel.callback()
-}
-export function hideEdit() {
-  editLabel.show = false
 }
 //改文字相关结束
 
 export function bindEvents(
   graph: Graph,
-  container: HTMLElement,
-  prop: Readonly<{ pname: string }>
+  container: HTMLElement
 ) {
+  graph.use(
+    new Scroller({
+      enabled: true,
+      pannable:true,
+    }),
+  )
+  graph.use(
+    new Snapline({
+      enabled: true,
+      sharp: true,
+    }),
+  )
+  graph.use(
+    new Clipboard({
+      enabled: true,
+    }),
+  )
+  graph.use(
+    new Selection({
+      enabled: true,
+      showNodeSelectionBox: true,
+    }),
+  )
+  graph.use(
+    new Keyboard({
+      enabled: true,
+      global: true,
+    }),
+  )
+  graph.use(
+    new History({
+      enabled: true,
+    }),
+  )
   //ctrl+cv delete
-  graph.bindKey(["ctrl+s", "meta+s"], () => {
-    if (prop.pname.length > 3) {
-      let data = graph.toJSON()
-      localStorage.setItem(prop.pname, JSON.stringify(data))
-      message.success("保存成功！")
-    } else {
-      message.error("无效文件！")
-    }
-    return false
-  })
   graph.bindKey(["meta+c", "ctrl+c"], () => {
     const cells = graph.getSelectedCells()
     if (cells.length) {
@@ -63,36 +90,16 @@ export function bindEvents(
     }
   })
   // #endregion
-
-  graph.bindKey(["ctrl+e", "meta+e"], () => {
-    if (prop.pname.length > 3) {
-      graph.toPNG(
-        (dataUri: string) => {
-          // 下载
-          DataUri.downloadDataUri(dataUri, "chart.png")
-        },
-        {
-          padding: {
-            horizontal: 30,
-            vertical: 10,
-          },
-        }
-      )
-    } else {
-      message.error("无效文件！")
-    }
-    return false
-  })
   //undo redo
   graph.bindKey(["meta+z", "ctrl+z"], () => {
-    if (graph.history.canUndo()) {
-      graph.history.undo()
+    if (graph.canUndo()) {
+      graph.undo()
     }
     return false
   })
   graph.bindKey(["meta+shift+z", "ctrl+shift+z"], () => {
-    if (graph.history.canRedo()) {
-      graph.history.redo()
+    if (graph.canRedo()) {
+      graph.redo()
     }
     return false
   })
@@ -115,39 +122,9 @@ export function bindEvents(
   //编辑文字
   graph.on("node:dblclick", (params) => {
     editLabel.show = true
-    editLabel.value = (params.node as any).label
-    const node = document.getElementById("editor")
-    node.style.left = params.x + 300 + "px"
-    node.style.top = params.y + 30 + "px"
-    nextTick(() => {
-      ;(node.children[0] as HTMLTextAreaElement).focus()
-    })
+    editLabel.value = params.node.data
     editLabel.callback = () => {
-      if (editLabel.value.length >= 0) {
-        ;(params.node as any).label = editLabel.value
-      }
-      editLabel.show = false
-    }
-  })
-  graph.on("edge:dblclick", (params) => {
-    editLabel.show = true
-    const lables = params.edge.getLabels()
-    if (lables.length == 0) {
-      params.edge.setLabels("")
-      editLabel.value = ""
-    } else {
-      editLabel.value = lables[0].attrs.label.text.toString()
-    }
-    const node = document.getElementById("editor")
-    node.style.left = params.x + 300 + "px"
-    node.style.top = params.y + 30 + "px"
-    nextTick(() => {
-      ;(node.children[0] as HTMLTextAreaElement).focus()
-    })
-    editLabel.callback = () => {
-      if (editLabel.value.length >= 0) {
-        params.edge.setLabels(editLabel.value)
-      }
+      params.node.data=editLabel.value
       editLabel.show = false
     }
   })
