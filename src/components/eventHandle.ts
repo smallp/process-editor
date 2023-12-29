@@ -10,12 +10,12 @@ import { Snapline } from '@antv/x6-plugin-snapline'
 //改文字相关
 export const editLabel = reactive({
   value: {
-    img:'',
-    name:'',
-    url:'',
+    img: '',
+    name: '',
+    url: '',
   },
   show: false,
-  callback: () => {},
+  callback: () => { },
 })
 export function editOnEnter() {
   editLabel.callback()
@@ -29,7 +29,7 @@ export function bindEvents(
   graph.use(
     new Scroller({
       enabled: true,
-      pannable:true,
+      pannable: true,
     }),
   )
   graph.use(
@@ -122,9 +122,9 @@ export function bindEvents(
   //编辑文字
   graph.on("node:dblclick", (params) => {
     editLabel.show = true
-    editLabel.value = params.node.data
+    editLabel.value = Object.assign({}, params.node.data)
     editLabel.callback = () => {
-      params.node.data=editLabel.value
+      params.node.data = editLabel.value
       editLabel.show = false
     }
   })
