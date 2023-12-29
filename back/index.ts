@@ -14,6 +14,7 @@ function createWindow() {
     win.loadURL("http://127.0.0.1:3000")
     win.webContents.openDevTools()
   } else {
+    win.setMenu(null)
     win.loadFile("dist/index.html")
   }
   win.show()
