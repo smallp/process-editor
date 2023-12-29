@@ -16,6 +16,7 @@ declare module 'vue' {
     ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
     AModal: typeof import('ant-design-vue/es')['Modal']
     APopover: typeof import('ant-design-vue/es')['Popover']
+    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     MyMenu: typeof import('./components/myMenu.vue')['default']
     ProcessMain: typeof import('./components/processMain.vue')['default']
     QuestionCircleTwoTone: typeof import('@ant-design/icons-vue')['QuestionCircleTwoTone']

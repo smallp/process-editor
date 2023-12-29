@@ -81,25 +81,32 @@ function init() {
   const mine = graph.createNode({
     shape: 'mine',
     data: {
-      img: '',
+      img: 'https://patchwiki.biligame.com/images/dsp/thumb/d/da/97gst2egdt2atxfh6tsa7a7o78jzqh3.png/64px-%E6%89%8B%E5%8A%A8%E9%87%87%E9%9B%86.png',
       name: '测试科技',
       url: '',
     }
   })
   stencil.load([mine], 'g')
-  // let data = ""
-  // if (prop.pname.length > 3) {
-  //   data = localStorage.getItem(prop.pname)
-  //   if (data) {
-  //     graph.fromJSON(JSON.parse(data))
-  //     graph.centerContent()
-  //   }
-  // }
 }
 
 onMounted(() => {
   container = document.getElementById("main")!
   init()
+})
+function importData(data: string) {
+  graph.fromJSON(JSON.parse(data))
+  graph.centerContent()
+}
+function getData() {
+  const data = graph.toJSON()
+  data.cells.forEach((cell: any) => {
+    delete cell.ports
+  })
+  return JSON.stringify(data)
+}
+defineExpose({
+  importData,
+  getData,
 })
 </script>
 <template>
