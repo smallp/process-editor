@@ -139,4 +139,52 @@ defineExpose({
   position: fixed;
   right: 0;
 }
+
+.techTreeCell {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 16px;
+  background-color: #163d4b;
+  position: relative;
+}
+
+.techTreeCell:hover {
+  background-color: #1f414e;
+  outline: 6px solid #bcbcbc;
+}
+
+.techTreeHeading {
+  padding: 12px 15px;
+}
+
+.techTreeIcon {
+  text-align: center;
+  position: absolute;
+  left: 68px;
+}
+
+.techTreeCell {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 16px;
+  background-color: #163d4b;
+  position: relative;
+}
+
+.techTreeCell:hover {
+  background-color: #1f414e;
+  outline: 6px solid #bcbcbc;
+}
+
+.techTreeHeading {
+  padding: 12px 15px;
+}
+
+.techTreeIcon {
+  text-align: center;
+  position: absolute;
+  left: 68px;
+}
 </style>

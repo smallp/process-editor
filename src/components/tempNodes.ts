@@ -45,7 +45,7 @@ const ports = {
 Shape.HTML.register({
   shape: 'mine',
   width: 200,
-  height: 100,
+  height: 120,
   ports: { ...ports },
   data: {
     img: '',
@@ -56,11 +56,8 @@ Shape.HTML.register({
   html(cell) {
     const { img, name, url } = cell.getData()
     const div = document.createElement('div')
-    div.style.border = '1px solid blue'
-    div.style.width = '100%'
-    div.style.height = '100%'
-    //div.innerHTML = `<div>${name}</div><a href="${url}"><img src="${img}" /></a>`
-    div.innerHTML = `<div>${name}</div><img src="${img}" />`
+    div.className = 'techTreeCell'
+    div.innerHTML = `<div class="techTreeHeading">${name}</div><img class="techTreeIcon" src="${img}" />`
     return div
   },
 })
