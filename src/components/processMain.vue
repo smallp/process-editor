@@ -25,21 +25,10 @@ function init() {
       router: {
         name: "manhattan",
         args: {
-          padding: 1,
+          padding: 20,
         },
       },
-      connector: {
-        name: "rounded",
-        args: {
-          radius: 8,
-        },
-      },
-      anchor: "center",
-      connectionPoint: "anchor",
       allowBlank: false,
-      snap: {
-        radius: 20,
-      },
       createEdge() {
         return new Shape.Edge({
           attrs: {
@@ -99,9 +88,6 @@ function importData(data: string) {
 }
 function getData() {
   const data = graph.toJSON()
-  data.cells.forEach((cell: any) => {
-    delete cell.ports
-  })
   return JSON.stringify(data)
 }
 defineExpose({
